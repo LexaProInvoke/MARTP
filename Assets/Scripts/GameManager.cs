@@ -91,13 +91,14 @@ public class GameManager : MonoBehaviour
 
             count += 1;
             SetCountText();
+            Debug.LogError("Pickups left" + currentZoneManager.CollectibleCount + ".");
 
-            Debug.LogError("Current zone = " + currentZone + ".");
         }
         else
         {
-            Debug.LogError("Invalid currentZone index or Zones list is empty = " + currentZone + ".");
+            Debug.LogError("Invalid currentZone index or Zones list is empty.");
         }
+        Debug.LogError("Current zone = " + currentZone + ".");
 
 
     }
