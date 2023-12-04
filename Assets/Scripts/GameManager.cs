@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             if (currentZoneManager.CollectibleCount <= 0)
             {
                 // Отключение двери/препятствия текущей зоны
-                // currentZoneManager.Door.SetActive(false); ??
+                currentZoneManager.Door.SetActive(false); // ??
 
                 // Увеличение текущей зоны
                 currentZone++;
