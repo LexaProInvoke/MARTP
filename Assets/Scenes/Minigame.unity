@@ -206,6 +206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 17540833}
+  - component: {fileID: 17540834}
   m_Layer: 0
   m_Name: '[Zone1]'
   m_TagString: Untagged
@@ -231,6 +232,20 @@ Transform:
   - {fileID: 908621768}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17540834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17540832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0c89eebc9d5fb458a90df68c9d74e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleCount: 12
+  Door: {fileID: 0}
 --- !u!1001 &84107874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1787,6 +1802,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 693035786}
+  - component: {fileID: 693035787}
   m_Layer: 0
   m_Name: '[Zone2]'
   m_TagString: Untagged
@@ -1812,6 +1828,20 @@ Transform:
   - {fileID: 1496870242}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &693035787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693035785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0c89eebc9d5fb458a90df68c9d74e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleCount: 12
+  Door: {fileID: 0}
 --- !u!1001 &699324164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3350,6 +3380,10 @@ MonoBehaviour:
   countText: {fileID: 279349904}
   timerText: {fileID: 264303970}
   winTextObject: {fileID: 1707118191}
+  Zones:
+  - {fileID: 17540834}
+  - {fileID: 693035787}
+  currentZone: 0
 --- !u!4 &1511307345
 Transform:
   m_ObjectHideFlags: 0
