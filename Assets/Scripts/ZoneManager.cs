@@ -12,4 +12,10 @@ public class ZoneManager : MonoBehaviour
 
     }
 
+    public GameObject[] GetPlayersInZone()
+    {
+        return GameObject.FindGameObjectsWithTag("Player"); // Предположим, что игроки помечены тегом "Player"
+    }
+
+
 }
