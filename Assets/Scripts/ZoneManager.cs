@@ -9,13 +9,32 @@ public class ZoneManager : MonoBehaviour
 
     void Start()
     {
-
     }
 
-    public GameObject[] GetPlayersInZone()
+    /*
+    public GameObject[] GetPlayersInAllZones()
     {
-        return GameObject.FindGameObjectsWithTag("Player"); // Предположим, что игроки помечены тегом "Player"
+        return GameObject.FindGameObjectsWithTag("Player"); // tag "Player"
     }
 
+    public GameObject[] GetPlayersInZone(string zone)
+    {
+        // Находим игроков только в зоне с указанным тегом
+        GameObject[] playersInZone = GameObject.FindGameObjectsWithTag("Player");
+
+        // Фильтруем найденных игроков по тегу зоны
+        List<GameObject> playersInSpecificZone = new List<GameObject>();
+        foreach (GameObject player in playersInZone)
+        {
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            if (playerController != null && playerController.zoneOfPlayer == zone)
+            {
+                playersInSpecificZone.Add(player);
+            }
+        }
+
+        return playersInSpecificZone.ToArray();
+    }
+    */
 
 }

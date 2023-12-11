@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private bool isGameRunning = false;
     public List<ZoneManager> Zones;
     public int currentZone;
+    public GameObject[] allPlayers;
 
     void Awake()
     {
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
         Manager = this;
         DontDestroyOnLoad(gameObject);
         currentZone = 0;
+        allPlayers = GameObject.FindGameObjectsWithTag("Player");
+
     }
 
     void Start()
@@ -68,25 +71,24 @@ public class GameManager : MonoBehaviour
     {
         if (currentZone >= 0 && currentZone < Zones.Count) // Проверка на допустимый диапазон
         {
-            // Получение текущего ZoneManager из списка Zones
             ZoneManager currentZoneManager = Zones[currentZone];
 
-            // Уменьшение количества объектов для сбора в текущей зоне
+            // pickups--
             currentZoneManager.CollectibleCount--;
 
-            // Проверка, достигнут ли ноль объектов для сбора в текущей зоне
             if (currentZoneManager.CollectibleCount <= 0)
             {
-                // Отключение двери/препятствия текущей зоны
+                // Obstacle for levels
                 // currentZoneManager.Door.SetActive(false); // ??
 
-                // Увеличение текущей зоны
                 currentZone++;
-                // Проверка, чтобы избежать выхода за пределы списка Zones
                 if (currentZone >= Zones.Count)
                 {
-                    currentZone = 0; // Возврат к первой зоне, если достигнут конец списка
+                    currentZone = 0; // loop when reached end of zone list
                 }
+
+                // TEMP when all pickups are collected - switch to zone 3
+                SwitchZone(3);
             }
 
             count += 1;
@@ -100,7 +102,6 @@ public class GameManager : MonoBehaviour
         }
         Debug.LogError("Current zone = " + currentZone + ".");
 
-
     }
 
     public void SwitchZone(int newZoneIndex)
@@ -108,38 +109,69 @@ public class GameManager : MonoBehaviour
         if (newZoneIndex >= 0 && newZoneIndex < Zones.Count)
         {
             currentZone = newZoneIndex;
-            print(currentZone);
-            // Деактивация игроков во всех зонах, кроме текущей
+
+            foreach (var player in allPlayers)
+            {
+                var playerController = player.GetComponent<PlayerController>();
+                if (playerController.zoneOfPlayer != Zones[currentZone].name)
+                {
+                    player.SetActive(false);
+                }
+                else
+                {
+                    player.SetActive(true);
+                }
+            }
+        }
+    }
+
+
+
+    /*
+    public void SwitchZone(int newZoneIndex)
+    {
+        Debug.LogError("switch zone func - new " + newZoneIndex);
+        if (newZoneIndex >= 0 && newZoneIndex < Zones.Count)
+        {
+            Debug.LogError("first check yes");
+            currentZone = newZoneIndex;
+
             for (int i = 0; i < Zones.Count; i++)
             {
                 if (i != currentZone)
                 {
-                    ZoneManager zoneManager = Zones[i];
-                    GameObject[] playersInZone = zoneManager.GetPlayersInZone(); // Получить всех игроков в зоне
+                    Debug.LogError("--------------------------------");
 
-                    // Деактивировать всех игроков в данной зоне
+                    ZoneManager zoneManager = Zones[i];
+                    GameObject[] playersInZone = zoneManager.GetPlayersInZone(zoneManager.name);
+                    Debug.LogError("ZONE NAME TO DESACTIVATE: " + zoneManager.name); 
+
                     foreach (GameObject player in playersInZone)
                     {
-                        player.SetActive(false);
+                        Debug.LogError("PLAYER ZONE NAME TO DESACTIVATE: " + player.name);
+                        player.SetActive(false); // Деактивируем игроков только в зонах, отличных от текущей
                     }
+
+                    Debug.LogError("--------------------------------");
                 }
             }
 
             // Активация игроков в текущей зоне
             ZoneManager currentZoneManager = Zones[currentZone];
-            GameObject[] playersInCurrentZone = currentZoneManager.GetPlayersInZone(); // Получить всех игроков в текущей зоне
+            GameObject[] playersInCurrentZone = currentZoneManager.GetPlayersInZone(currentZoneManager.name);
+            Debug.LogError("HERE ___ currentZoneManager.name " + currentZoneManager.name);
 
-            // Активация всех игроков в текущей зоне
             foreach (GameObject player in playersInCurrentZone)
             {
-                player.SetActive(true);
+                Debug.LogError("!!! " + player.name);
+                player.SetActive(true); // Активируем игроков только в текущей зоне
             }
         }
         else
         {
             Debug.LogError("Invalid zone index!");
         }
-    }
+    }*/
 
 }
 

@@ -8,11 +8,11 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
-
     private Rigidbody rb;
     private float movementX;
     private float movementY;
     public float jumpForce = 10f;
+    public string zoneOfPlayer;
 
     // Start is called before the first frame update
     void Start()
