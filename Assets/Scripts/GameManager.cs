@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public List<ZoneManager> Zones;
     public int currentZone;
     public GameObject[] allPlayers;
+    public UnityEvent<int> OnNextZone;
 
     void Awake()
     {
@@ -114,18 +116,18 @@ public class GameManager : MonoBehaviour
         if (newZoneIndex >= 0 && newZoneIndex < Zones.Count)
         {
             currentZone = newZoneIndex;
-
+            OnNextZone.Invoke(newZoneIndex);
             foreach (var player in allPlayers)
             {
-                var playerController = player.GetComponent<PlayerController>();
-                if (playerController.zoneOfPlayer != Zones[currentZone].name)
-                {
-                    player.SetActive(false);
-                }
-                else
-                {
-                    player.SetActive(true);
-                }
+                ///var playerController = player.GetComponent<PlayerController>();
+                ///if (playerController.zoneOfPlayer != Zones[currentZone].name)
+               // {
+                    //player.SetActive(false);
+                //}
+               // else
+               // {
+                    //player.SetActive(true);
+               // }
             }
         }
     }

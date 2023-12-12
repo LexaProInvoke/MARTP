@@ -1,27 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private float lifetime = 10f;
+    private bool collided = false;
+
     void Start()
     {
-        
+        StartCoroutine(DestroyAfterTime());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerController>().GotHit();
         }
-        Destroy(this.gameObject, 0.1f);
+
+        collided = true;
+        Destroy(gameObject);
+    }
+
+    IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(lifetime);
+        if (!collided)
+        {
+            Destroy(gameObject);
+        }
     }
 }
