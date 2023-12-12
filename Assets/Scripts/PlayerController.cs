@@ -68,7 +68,11 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Rigidbody component not found on the player!");
         }
     }
-    
+
+    public void GotHit()
+    {
+        GameManager.Manager.RestartGame(); 
+    }
 
 
 }
